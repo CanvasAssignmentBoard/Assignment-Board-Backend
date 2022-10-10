@@ -5,11 +5,11 @@ import {config} from 'dotenv'
 
 config()
 
-const app: Application = express()
+const app = express()
 
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
-    res.send("Hello from ts app")
-})
+app.get('/', (req: Request, res: Response, next: NextFunction): Response => {
+    return res.status(200).json({message: 'Hello World!'})
+  });
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     next(new createHttpError.NotFound())
@@ -29,3 +29,5 @@ const PORT: Number = Number(process.env.PORT) || 3000
 const server: Server = app.listen(PORT, () => 
     console.log(`running on port ${PORT}`)
 )
+
+export default server;
