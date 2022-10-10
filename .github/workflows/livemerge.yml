@@ -8,6 +8,7 @@ name: Deploy
 on:
   pull_request:
     types: [opened]
+    branches: ["live"]
 jobs:
   Tests:
     secrets: inherit
