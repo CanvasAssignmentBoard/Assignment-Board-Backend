@@ -7,7 +7,7 @@ name: Deploy-Live
 
 on:
   pull_request:
-    types: [closed]
+    types: [merged]
     branches: [ "live"]
 jobs:
   Deploy:
