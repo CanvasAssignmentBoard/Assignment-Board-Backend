@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy-Live
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -6,21 +6,16 @@ name: Deploy
 # documentation.
 
 on:
-  push:
-    branches: [ "dev", 'v*', 'v*.*.*' ]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+  pull_request:
+    types: [closed]
+    branches: [ "live"]
 jobs:
-  Tests:
-    secrets: inherit
-    uses: ./.github/workflows/tests.yml  # use the callable tests job to run test
   Deploy:
-    needs: Tests
+    if: github.event.pull_request.merged == true
     secrets: inherit
     uses: ./.github/workflows/docker.yml
   CodeQuality:
-    needs: Tests
+    if: github.event.pull_request.merged == true
     secrets: inherit
     uses: ./.github/workflows/SonarCloud.yml
   
-

@@ -1,4 +1,4 @@
-name: Deploy
+name: Live-Test
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -8,6 +8,7 @@ name: Deploy
 on:
   pull_request:
     types: [opened]
+    branches: ["live"]
 jobs:
   Tests:
     secrets: inherit
