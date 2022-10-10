@@ -7,13 +7,15 @@ name: Deploy-Live
 
 on:
   pull_request:
-    types: [merged]
+    types: [closed]
     branches: [ "live"]
 jobs:
   Deploy:
+    if: github.event.pull_request.merged == true
     secrets: inherit
     uses: ./.github/workflows/docker.yml
   CodeQuality:
+    if: github.event.pull_request.merged == true
     secrets: inherit
     uses: ./.github/workflows/SonarCloud.yml
   
