@@ -7,7 +7,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ "live", "dev", 'v*', 'v*.*.*' ]
+    branches: [ "dev", 'v*', 'v*.*.*' ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
 jobs:
