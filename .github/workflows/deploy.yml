@@ -1,4 +1,4 @@
-name: Deploy
+name: Dev-Deploy
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -12,13 +12,16 @@ on:
     tags: [ 'v*.*.*' ]
 jobs:
   Tests:
+    if: github.event.pull_request.merged == false
     secrets: inherit
     uses: ./.github/workflows/tests.yml  # use the callable tests job to run test
   Deploy:
+    if: github.event.pull_request.merged == false
     needs: Tests
     secrets: inherit
     uses: ./.github/workflows/docker.yml
   CodeQuality:
+    if: github.event.pull_request.merged == false
     needs: Tests
     secrets: inherit
     uses: ./.github/workflows/SonarCloud.yml
