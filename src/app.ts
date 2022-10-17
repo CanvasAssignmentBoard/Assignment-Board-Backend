@@ -2,6 +2,7 @@ import express, {Request, Response, NextFunction, Application, ErrorRequestHandl
 import {Server} from 'http'
 import createHttpError from 'http-errors'
 import {config} from 'dotenv'
+import fetch from 'node-fetch'
 
 config()
 
@@ -22,6 +23,14 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
         message: err.message
     })
 }
+
+fetch('https://fhict.instructure.com/api/v1/courses', {
+    method: 'get',
+    headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer 2464~yzuTT1Hh04MBzzt8bIjuxxBzNJTgXIr3EvDrev8QruGYC9YwnRYUggVo0kfiRy7Z'}
+}).then(async data => {
+    let output = await data.buffer()
+    console.log(output.toString())
+})
 
 app.use(errorHandler)
 
